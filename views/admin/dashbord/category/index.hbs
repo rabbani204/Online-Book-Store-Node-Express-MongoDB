@@ -19,9 +19,8 @@
                 <th>Title</th>
                 <th>English Title</th>
                 <th>Description</th>
-                <th></th>
-                <th></th>
-                <th></th>
+                <th>Update</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -40,12 +39,6 @@
                     <button data-toggle="modal" value={{this.id}} class="delete" data-target="#myModal">
                         <i class="fa fa-trash-o" aria-hidden="true"> </i>
                     </button>
-                </td>
-
-                <td>
-                    <a href="/admin/dashbord/category/{{this.id}}/view">
-                        <i class="fa fa-eye"></i>
-                    </a>
                 </td>
 
                 <div class="modal fade" id="myModal" role="dialog">

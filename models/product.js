@@ -22,9 +22,6 @@ var ProductSchema = mongoose.Schema({
 	image_mime:{
 		type: String
 	},
-	subcategory: {
-		type: String
-	},
 	price: {
 		type: String
 	},

@@ -23,9 +23,8 @@
                 <th>Price</th>
                 <th>Discount</th>
                 <th>Discount Price</th>
-                <th></th>
-                <th></th>
-                <th></th>
+                <th>Update</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -53,12 +52,6 @@
                     <button data-toggle="modal" value={{this.id}} class="delete" data-target="#myModal">
                         <i class="fa fa-trash-o" aria-hidden="true"> </i>
                     </button>
-                </td>
-
-                <td>
-                    <a href="/admin/dashbord/subcategory/{{this.id}}/view">
-                        <i class="fa fa-eye"></i>
-                    </a>
                 </td>
 
                 <div class="modal fade" id="myModal" role="dialog">

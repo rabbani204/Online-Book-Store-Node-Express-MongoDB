@@ -336,6 +336,7 @@ function checkFileType(file, cb) {
 //end file uploading functions
 
 router.post('/product', function (req, res) {
+	console.log('yyyes')
     upload(req, res, (err) => {
         if (err) {
             res.redirect('/admin/dashbord/product/create', {
@@ -396,8 +397,8 @@ router.get('/product/:id/edit', function (req, res) {
                 var chunkSize = 3;
                 for (var i = 0; i < docs.length; i += chunkSize) {
                     conversionChunks.push(docs.slice(i, i + chunkSize));
-                }
-                res.render('admin/dashbord/product/form', { layout: 'admin', subcategory: subcategory, category: conversionChunks });
+				}
+                res.render('admin/dashbord/product/form', { layout: 'admin', subcategory: subcategory});
             });
             //        
         });
@@ -410,26 +411,25 @@ router.post('/product/:id', function (req, res) {
         res.redirect('/admin/auth/login');
     }
     else {
-        // const product = {
-        //     title: req.body.title,
-        //     titleen: req.body.titleen,
-        //     description: req.body.description,
-        //     category: req.body.category,
-        //     subcategory: req.body.subcategory,
-        //     image: filename,
-        //     price: req.body.price,
-        //     discount: req.body.discount,
-        //     discountprice: (1-(req.body.discount/100))*req.body.price,
-        // };
+        const product = {
+            title: req.body.title,
+            titleen: req.body.titleen,
+            description: req.body.description,
+            category: req.body.category,
+            image: filename,
+            price: req.body.price,
+            discount: req.body.discount,
+            discountprice: (1-(req.body.discount/100))*req.body.price,
+        };
 
-        // Product.findByIdAndUpdate(req.params.id, product, { new: true }, function (err, model) {
-        //     if (err) {
-        //         console.log('error');
-        //     } else {
-        //         console.log('success');
-        //         res.redirect('/admin/dashbord/product');
-        //     }
-        // })
+        Product.findByIdAndUpdate(req.params.id, product, { new: true }, function (err, model) {
+            if (err) {
+                console.log('error');
+            } else {
+                console.log('success');
+                res.redirect('/admin/dashbord/product');
+            }
+        })
          console.log('productbsdhf')
     }
 });
