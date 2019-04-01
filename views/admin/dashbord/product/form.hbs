@@ -31,6 +31,18 @@
                                     </select>
                                 </div>
 
+								<div class="form-group">
+                                    <label for="exampleFormControlSelect1">Select SubCategory</label>
+                                    <select class="form-control" name="subcategory" id="exampleFormControlSelect1">
+                                        {{# each subcategory }} {{# each this}}
+                                        <option>{{this.titleen}}</option>
+                                        {{/each}}{{/each}}
+                                    </select>
+                                </div>
+
+
+
+
                                 <div class="form-group">
                                     <label for="source">Image</label>
                                     <input type="file" name="image" class="form-control" id="source" placeholder="Enter Title">
