@@ -12,6 +12,7 @@ const path = require('path');
 const Category = require('../models/category')
 const SubCategory = require('../models/subcategory')
 const Product = require('../models/product')
+const Order = require('../models/order')
 
 router.get('/', function (req, res) {
     if (!req.session.user && !req.cookies.user_sid) {
@@ -450,8 +451,28 @@ router.get('/product/:id/delete', function (req, res) {
         })
     }
 });
-
 //end of product
+
+//order
+
+router.get('/orders', function (req, res) {
+
+    if (!req.session.user && !req.cookies.user_sid) {
+        res.redirect('/admin/auth/login');
+    }
+    else {
+        var order = Order.find(function (err, docs) {
+            var conversionChunks = [];
+            var chunkSize = 3;
+            for (var i = 0; i < docs.length; i += chunkSize) {
+                conversionChunks.push(docs.slice(i, i + chunkSize));
+			}
+			console.log(conversionChunks, 'this is conversion chunks')
+            res.render('admin/dashbord/order/index', { layout: 'admin', order: conversionChunks });
+        });
+    }
+
+});
 
 router.get('/logout', function (req, res) {
     req.session.destroy(function (err) {
