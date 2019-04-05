@@ -81,6 +81,7 @@ router.post('/category', function (req, res) {
 });
 
 router.get('/category/:id/edit', function (req, res) {
+	console.log('yess')
     if (!req.session.user && !req.cookies.user_sid) {
         res.redirect('/admin/auth/login');
     } else {
@@ -462,7 +463,7 @@ router.get('/orders', function(req, res) {
 	  }
 	  console.log(err)
 	  console.log('value', value)
-	  res.render('admin/dashbord/order/index', {products: {value}});
+	  res.render('admin/dashbord/order/index', {layout: 'admin',products: {value}});
 	})
   });
 
