@@ -31,10 +31,11 @@
                  <td>{{this.titleen}}</td>
                 <td>{{this.description}}</td>
                 <td>
-                    <a href="/admin/dashbord/category/{{this.id}}/edit">
+                    <a href="/admin/dashbord/category/{{this.id}}/edit"></a>
                         <i class="fa fa-pencil"></i>
                     </a>
                 </td>
+
                 <td>
                     <button data-toggle="modal" value={{this.id}} class="delete" data-target="#myModal">
                         <i class="fa fa-trash-o" aria-hidden="true"> </i>
@@ -60,10 +61,14 @@
 
                     </div>
                 </div>
+
+
             </tr>
             {{/each}} {{/each}}
         </tbody>
     </table>
 </div>
+
+
 <script src="/js/jquery.js"></script>
 <script src="/jquery/try.js"></script>
