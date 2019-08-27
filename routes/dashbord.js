@@ -490,6 +490,23 @@ router.get('/ordersss', function (req, res) {
     }
 });
 
+router.get('/order/:id/delete', function (req, res) {
+    if (!req.session.user && !req.cookies.user_sid) {
+        res.redirect('/admin/auth/login');
+    }
+    else {
+        Order.findByIdAndRemove(req.params.id, function (err, model) {
+            if (err) {
+                console.log('error');
+            } else {
+                console.log('success');
+                res.redirect('/admin/dashbord/orders');
+            }
+
+        })
+    }
+});
+
 router.get('/logout', function (req, res) {
     req.session.destroy(function (err) {
         console.log(err);

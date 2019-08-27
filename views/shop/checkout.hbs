@@ -5,13 +5,22 @@
         <div id="charge-error" class="alert alert-danger {{#if noError}}hidden{{/if}}">
           {{errMsg}}
         </div>
-        <a type="submit" class="btn btn-success" href="/checkoutbybkash">Pay By Bkash</a>
+        <div class="row">
+            <a type="submit" class="btn btn-success" href="/checkoutbybkash">Pay By Bkash</a>
+            <a type="submit" class="btn btn-success" href="/cashondelivery">Cash On Delivery</a>
+        </div>
         <form action="/checkout" method="post" id="checkout-form">
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" class="form-control" required name="name">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="name">Confirmation Email</label>
+                        <input type="text" id="name" class="form-control" required name="email">
                     </div>
                 </div>
                 <div class="col-xs-12">

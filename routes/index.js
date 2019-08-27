@@ -3,6 +3,7 @@ var router = express.Router();
 var Cart = require('../models/cart');
 var Product = require('../models/product');
 var Order = require('../models/order');
+var nodemailer = require('nodemailer');
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('general/index', { layout: 'generallayouts'});
@@ -93,6 +94,15 @@ router.get('/checkoutbybkash', isLoggedIn, function (req, res, next) {
   res.render('shop/checkoutbkash', { total: cart.totalPrice, errMsg: errMsg, noError: !errMsg });
 });
 
+router.get('/cashondelivery', isLoggedIn, function (req, res, next) {
+  if (!req.session.cart) {
+    return res.redirect('/shopping-cart');
+  }
+  var cart = new Cart(req.session.cart);
+  var errMsg = req.flash('error')[0];
+  res.render('shop/cashondelivery', { total: cart.totalPrice, errMsg: errMsg, noError: !errMsg });
+});
+
 
 router.post('/checkout', isLoggedIn, function (req, res, next) {
   if (!req.session.cart) {
@@ -120,12 +130,59 @@ router.post('/checkout', isLoggedIn, function (req, res, next) {
       name: req.body.name,
       paymentId: charge.id
     });
+
+    console.log('Node Mailer')
     order.save(function (err, result) {
       req.flash('success', 'Successfully bought product!');
       req.session.cart = null;
+
+      const output = `
+      <p>This mail is from DIU Book Store</p>
+      <h3>Your order has beeen confirmed</h3>
+      <ul>  
+      <li>Your Name: ${req.body.name}</li>
+      <li>Username: ${req.body.address}</li>
+      <li>Email: ${req.body.email}</li>
+      </ul>
+      <h3>Stay With DIU Book Store</h3>
+    `;
+  
+      // create reusable transporter object using the default SMTP transport
+      let transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        secure: false,
+          // true for 465, false for other ports
+        auth: {
+          user: 'careerline.io@gmail.com', // generated ethereal user
+          pass: 'programming'  // generated ethereal password
+        },
+        tls: {
+          rejectUnauthorized: false
+        }
+      });
+  
+      // setup email data with unicode symbols
+      let mailOptions = {
+        from: '"careerline.io" <careerline.io@gmail.com>', // sender address
+        to: req.body.email, // list of receivers
+        subject: 'Order Confirmation', // Subject line
+        text: 'Your Order Confirmed', // plain text body
+        html: output // html body
+      };
+  
+      // send mail with defined transport object
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          return console.log(error);
+        }
+        // console.log('Message sent: %s', info.messageId);
+        // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+      }); 
+
+
       res.redirect('/');
     });
-  });
+  });       
 });
 
 router.post('/addproduct', function (req, res) {
