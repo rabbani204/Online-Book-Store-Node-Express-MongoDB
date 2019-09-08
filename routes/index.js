@@ -85,6 +85,15 @@ router.get('/checkout', isLoggedIn, function (req, res, next) {
   res.render('shop/checkout', { total: cart.totalPrice, errMsg: errMsg, noError: !errMsg });
 });
 
+router.get('/lastpage', isLoggedIn, function (req, res, next) {
+  if (!req.session.cart) {
+    return res.redirect('/shopping-cart');
+  }
+  var cart = new Cart(req.session.cart);
+  var errMsg = req.flash('error')[0];
+  res.render('general/last', { total: cart.totalPrice, errMsg: errMsg, noError: !errMsg });
+});
+
 router.get('/checkoutbybkash', isLoggedIn, function (req, res, next) {
   if (!req.session.cart) {
     return res.redirect('/shopping-cart');
@@ -131,7 +140,6 @@ router.post('/checkout', isLoggedIn, function (req, res, next) {
       paymentId: charge.id
     });
 
-    console.log('Node Mailer')
     order.save(function (err, result) {
       req.flash('success', 'Successfully bought product!');
       req.session.cart = null;
@@ -178,9 +186,7 @@ router.post('/checkout', isLoggedIn, function (req, res, next) {
         // console.log('Message sent: %s', info.messageId);
         // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
       }); 
-
-
-      res.redirect('/');
+      res.render('general/last');
     });
   });       
 });
