@@ -461,9 +461,12 @@ router.get('/orders', function(req, res) {
 	  if (err){
 		console.log(err)
 	  }
-	  console.log(err)
-	  console.log('value', value)
-	  res.render('admin/dashbord/order/index', {layout: 'admin',products: {value}});
+	  let x = [];
+      value.map(v=>{
+          x.push(v)
+      })
+      x.reverse()
+	  res.render('admin/dashbord/order/index', {layout: 'admin',products: {x}});
 	})
   });
 
@@ -487,6 +490,27 @@ router.get('/ordersss', function (req, res) {
 			// }
             // res.render('admin/dashbord/order/index', { layout: 'admin', subcategory: conversionChunks });
         });
+    }
+});
+
+router.get('/order/:id/edit', function (req, res) {
+    if (!req.session.user && !req.cookies.user_sid) {
+        res.redirect('/admin/auth/login');
+    }
+    else {
+        const order = {
+           accpeted: true,
+        };
+
+        Order.findByIdAndUpdate(req.params.id, order, { new: true }, function (err, model) {
+            if (err) {
+                console.log('error');
+            } else {
+                console.log('success');
+                res.redirect('/admin/dashbord/orders');
+            }
+        })
+         console.log('productbsdhf')
     }
 });
 

@@ -14,7 +14,8 @@
                 <th>Name</th>
                 <th>PaymentId</th>
                 <th>Total Price</th>
-                <th>Update</th>
+                <th>Accpeted</th>
+                <th>Accpet</th>
                 <th>Delete</th>
             </tr>
         </thead>
@@ -26,9 +27,10 @@
                 <td>{{this.name}}</td>
                 <td>{{this.paymentId}}</td>
                 <td>{{this.cart.totalPrice}}</td>
+                <td>{{this.accpeted}}</td>
                 <td>
-                    <a href="/admin/dashbord/product/{{this.id}}/edit">
-                        <i class="fa fa-pencil"></i>
+                    <a href="/admin/dashbord/order/{{this.id}}/edit">
+                        <i class="fa fa-check"></i>
                     </a>
                 </td>
                 <td>
