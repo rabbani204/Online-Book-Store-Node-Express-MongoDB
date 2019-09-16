@@ -1,74 +1,61 @@
 <style>
-  input{
-  border: black 2px solid;
-  width: 35px;
-  height: 25px;
-  text-align: center;
-}
+  input {
+    border: black 2px solid;
+    width: 35px;
+    height: 25px;
+    text-align: center;
+  }
 
-img{
-  height:50px;
-  width: 50px;
-}
+  img {
+    height: 50px;
+    width: 50px;
+  }
 
-.description{
-  position:relative;
-  left: 70px;
-  bottom: 50px;
-}
+  .description {
+    position: relative;
+    left: 70px;
+    bottom: 50px;
+  }
+
+  .product-item {
+    margin-bottom: 15px;
+  }
 </style>
 {{# if products}}
-<div style="background: darkkhaki; padding: 40px;">
-  <div class="row">
-  <div class="">
-    <table class="table table-striped">
-    <tbody>
-      <tr>
-        <th>Item</th>
-        <th>Price</th>
-        <th>Quantity</th>
-      </tr>
-      {{# each products}}
-      <tr>
-        <td><img src="/uploads/{{this.image}}"></br></td>
-        <td id="price">${{this.price}}</td>
-        <td>
-            <div class="row">
-              <div>
-                <a type="button" class="dec" href="/reduce/{{this.item._id}}">-</a>
-              </div>
-              <div>
-                <p id="qty">{{this.qty}}</p>  
-              </div>
-              <div>
-                <a type="button" class="inc" href="/remove/{{this.item._id}}">+</a>
-              </div>
+<div class="row">
+  <div class="col-sm-8 col-md-8 col-md-offset-2 col-sm-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="" style="text-transform: uppercase">Total: <span style="color: #f57224"> TK. {{totalPrice}}</span>
+        </h3>
+      </div>
+      <div class="panel-body">
+        {{# each products}}
+        <div class="product-item">
+          <img src="/uploads/image-1553912201731.jpg" alt="Product">
+          <span>
+            This is title
+          </span>
+          <div class="btn-group">
+            <a class="btn btn-info" href="/reduce/{{this.item._id}}">-</a>
+            <span class="btn btn-info">{{this.qty}}</span>
+            <a class="btn btn-info" href="#">+</a>
           </div>
-        </td>
-      </tr>
+          <strong>TK. {{this.price}}</strong>
+          <a class="btn btn-danger pull-right btn-sm" href="/remove/{{this.item._id}}">X</a>
+          <hr>
+        </div>
         {{/each}}
-    </tbody>
-  </table>
+      </div>
+      <div class="panel-footer">
+        <a href="/checkout" type="button" class="btn btn-success">Checkout</a>
+      </div>
     </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-    <strong>Total:{{totalPrice}}</strong>
-  </div>
-</div>
-<hr />
-<div class="row">
-  <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-    <a href="/checkout" type="button" class="btn btn-success">Checkout</a>
   </div>
 </div>
 
 {{else}}
-<div class="row">
-  <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-    <h2>No items in cart</h2>
-  </div>
-</div>
+<div class="text-center">
+  <h2>No items in cart</h2>
 </div>
 {{/if}}

@@ -25,6 +25,18 @@ router.get('/order', function (req, res, next) {
   });
 })
 
+router.get('/order/:id', function (req, res, next) {
+  var successMsg = req.flash('success')[0];
+  Product.find({category: req.params.id},function (err, docs) {
+    var productChunks = [];
+    var chunkSize = 3;
+    for (var i = 0; i < docs.length; i += chunkSize) {
+      productChunks.push(docs.slice(i, i + chunkSize));
+    }
+    res.render('shop/index', {title: 'Shopping Cart', products: productChunks, successMsg: successMsg, noMessages: !successMsg });
+  });
+})
+
 // /admin/dashbord/orders
 
 router.get('/admin/orders', function (req, res, next) {

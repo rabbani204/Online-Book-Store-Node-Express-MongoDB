@@ -1,44 +1,38 @@
-<nav class="navbar navbar-default" style="background: rgba(184, 109, 11, 0.767);">
-    <div class="container-fluid">
+<nav class="navbar" id="fh5co-header">
+    <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-                aria-expanded="false" style="color: white;">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/" style="color: white;">DIU Book Store</a>
-                           
-                            <form method="post" action="/search" class="form-inline my-2 my-lg-0">
-                                <input name="title" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
-                            </form>
-                        
+            <a class="navbar-brand" href="/" style="color: #fff;">DIU Book Shop</a>
         </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form class="navbar-form navbar-left" method="post" action="/search">
+                <div class="form-group">
+                    <input name="title" class="form-control" type="search" placeholder="Search" aria-label="Search">
+                </div>
+                <button type="submit" class="btn btn-success">Search</button>
+            </form>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="/shopping-cart/" style="color: white;" >
-                        <i class="fa fa-shopping-cart"aria-hidden="true"></i> Shopping Cart
+                    <a href="/shopping-cart" style="color:#fff;background:transparent">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i> Shopping Cart
                         <span class="badge">{{session.cart.totalQty}}</span>
                     </a>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" style="color: white;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <a href="#" style="color:#fff;background:transparent" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        aria-expanded="false">
                         <i class="fa fa-user" aria-hidden="true"></i> User Management
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li>
-                            {{!-- <form  method="post" action="/search" class="form-inline my-2 my-lg-0">
-                                <input type="text" name="title" class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                            </form> --}}
-                        </li>
                         {{# if login}}
                         <li>
                             <a href="/user/profile">User Account</a>
@@ -56,15 +50,8 @@
                         </li>
                         {{/if}}
                     </ul>
-                    {{!--
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form> --}}
                 </li>
             </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container-fluid -->
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
 </nav>
