@@ -13,7 +13,11 @@ router.get('/admin/logout', function(req, res, next){
   res.render('general/index', { layout: 'admin'});
 })
 
-router.get('/order', function (req, res, next) {
+router.get('/user/changepass', function(req, res){
+   res.redirect('/order')
+})
+
+router.get('/order', function (req, res, nextq) {
   var successMsg = req.flash('success')[0];
   Product.find(function (err, docs) {
     var productChunks = [];
