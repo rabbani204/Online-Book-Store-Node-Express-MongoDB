@@ -19,7 +19,7 @@
     "express-session": "^1.15.6",
     "express-validator": "^4.3.0",
     "hbs": "~3.1.0",
-    "mongoose": "^4.13.7",
+    "mongoose": "^5.7.5",
     "morgan": "~1.6.1",
     "multer": "^1.4.1",
     "nodemailer": "^6.0.0",
